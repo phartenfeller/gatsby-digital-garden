@@ -17,6 +17,8 @@ module.exports = {
         contentPath: `${__dirname}/../docs`,
         rootNote: "readme",
         ignore: ["**/private/**/*"],
+        // sidebarDisabled: true,
+        // noteWidth: 1000,
       },
     },
   ],
