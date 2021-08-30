@@ -70,6 +70,7 @@ exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions;
   createTypes(`type PhilippsFoamThemeConfig implements Node {
 sidebarDisabled: Boolean!
+noteWidth: Int!
 }`);
 };
 
@@ -92,10 +93,11 @@ exports.onCreateNode = async ({ node, actions, loadNodeContent }, options) => {
 
 exports.sourceNodes = (
   { actions: { createNode }, createNodeId, createContentDigest },
-  { sidebarDisabled = false }
+  { sidebarDisabled = false, noteWidth = 625 }
 ) => {
   const themeConfig = {
     sidebarDisabled,
+    noteWidth,
   };
 
   createNode({

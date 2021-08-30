@@ -6,6 +6,7 @@ import {
   useStackedPagesProvider,
 } from 'react-stacked-pages-hook';
 import useKeyboardListeners from '../hooks/useKeyboardListeners';
+import useNoteWidth from '../state/useNoteWidth';
 import useThemeState from '../state/useThemeState';
 import { dataToNote } from '../utils/data-to-note';
 import './custom.css';
@@ -19,17 +20,13 @@ import './theme.css';
 
 let themeInitialized = false;
 
-const Content = ({ windowWidth, scrollContainer, stackedPages, index }) => {
-  const settings = useStaticQuery(graphql`
-    query themeSettings {
-      philippsFoamThemeConfig {
-        sidebarDisabled
-      }
-    }
-  `);
-
-  const { sidebarDisabled } = settings.philippsFoamThemeConfig;
-
+const Content = ({
+  scrollContainer,
+  stackedPages,
+  index,
+  sidebarDisabled,
+  noteWidth,
+}) => {
   useKeyboardListeners();
   const { theme, setTheme } = useThemeState();
   const [sideBarOpen, setSideBarOpen] = useState(false);
@@ -54,7 +51,7 @@ const Content = ({ windowWidth, scrollContainer, stackedPages, index }) => {
         <div className="note-columns-scrolling-container" ref={scrollContainer}>
           <div
             className="note-columns-container"
-            style={{ width: 625 * (stackedPages.length + 1) }}
+            style={{ width: noteWidth * (stackedPages.length + 1) }}
           >
             {stackedPages.map((page, i) => (
               <NoteWrapper
@@ -80,14 +77,28 @@ const Content = ({ windowWidth, scrollContainer, stackedPages, index }) => {
 };
 const MemoContent = memo(Content);
 
-const NotesLayout = ({ location, slug, data }) => {
+const NotesLayout = ({ location, data }) => {
+  const settings = useStaticQuery(graphql`
+    query themeSettings {
+      philippsFoamThemeConfig {
+        sidebarDisabled
+        noteWidth
+      }
+    }
+  `);
+
+  const { sidebarDisabled, noteWidth } = settings.philippsFoamThemeConfig;
+
+  const { activeNoteWidth, initWidth } = useNoteWidth();
+  initWidth(noteWidth); // set initial note width
+
   const windowWidth = useWindowWidth();
 
   const [state, scrollContainer] = useStackedPagesProvider({
     firstPage: { slug: data?.file?.fields?.slug, data },
     location,
     processPageQuery: dataToNote,
-    pageWidth: 625,
+    pageWidth: activeNoteWidth,
   });
 
   let pages = state.stackedPages;
@@ -113,6 +124,8 @@ const NotesLayout = ({ location, slug, data }) => {
         scrollContainer={scrollContainer}
         stackedPages={pages}
         index={activeIndex}
+        sidebarDisabled={sidebarDisabled}
+        noteWidth={activeNoteWidth}
       />
     </StackedPagesProvider>
   );
