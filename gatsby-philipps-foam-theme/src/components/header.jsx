@@ -1,10 +1,11 @@
+import { MenuIcon } from '@heroicons/react/solid';
 import { Link } from 'gatsby';
 import React from 'react';
-import { MenuIcon } from '@heroicons/react/solid';
 import useSiteMetadata from '../use-site-metadata';
 import DarkModeToggle from './dark-mode-toggle';
 import GraphButton2 from './graph-button2';
 import SearchButton from './search-button';
+import SettingsButton from './settings-modal/settings-button';
 
 const Header = ({ sideBarOpen, setSideBarOpen, sidebarDisabled }) => {
   const siteMetadata = useSiteMetadata();
@@ -34,6 +35,7 @@ const Header = ({ sideBarOpen, setSideBarOpen, sidebarDisabled }) => {
         <SearchButton />
         <GraphButton2 />
         {typeof window !== 'undefined' ? <DarkModeToggle /> : null}
+        <SettingsButton />
       </div>
     </header>
   );
