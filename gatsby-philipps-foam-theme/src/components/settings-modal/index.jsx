@@ -1,6 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react';
 import React, { Fragment, useRef } from 'react';
 import useSettingsModal from '../../state/useSettingsModal';
+import SettingsContent from './settings-content';
 
 const SettingsModal = () => {
   const { isOpen, close } = useSettingsModal();
@@ -65,7 +66,7 @@ const SettingsModal = () => {
                   </svg>
                 </button>
               </div>
-              <div className="" />
+              <SettingsContent />
             </div>
           </Transition.Child>
         </div>

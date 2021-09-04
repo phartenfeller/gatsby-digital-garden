@@ -10,8 +10,8 @@ const SettingsButton = () => {
     <>
       <button
         type="button"
-        title="Show Settings Sceen"
-        aria-label="Show Settings Sceen"
+        title="Show Settings"
+        aria-label="Show Settings"
         className="header-button"
         onClick={open}
       >
