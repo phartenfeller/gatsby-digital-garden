@@ -10,8 +10,7 @@ export default () => {
     }
   `);
 
-  const { sidebarDisabled, noteWidth } =
-    data.themeSettings.philippsFoamThemeConfig;
+  const { sidebarDisabled, noteWidth } = data.philippsFoamThemeConfig;
 
   return { sidebarDisabled, noteWidth };
 };
