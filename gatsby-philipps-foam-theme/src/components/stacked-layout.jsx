@@ -1,11 +1,11 @@
 import { useWindowWidth } from '@react-hook/window-size';
-import { graphql, useStaticQuery } from 'gatsby';
 import React, { memo, useEffect, useState } from 'react';
 import {
   StackedPagesProvider,
   useStackedPagesProvider,
 } from 'react-stacked-pages-hook';
 import useKeyboardListeners from '../hooks/useKeyboardListeners';
+import useThemeSettings from '../hooks/useThemeSettings';
 import useNoteWidth from '../state/useNoteWidth';
 import useThemeState from '../state/useThemeState';
 import { dataToNote } from '../utils/data-to-note';
@@ -78,16 +78,7 @@ const Content = ({
 const MemoContent = memo(Content);
 
 const NotesLayout = ({ location, data }) => {
-  const settings = useStaticQuery(graphql`
-    query themeSettings {
-      philippsFoamThemeConfig {
-        sidebarDisabled
-        noteWidth
-      }
-    }
-  `);
-
-  const { sidebarDisabled, noteWidth } = settings.philippsFoamThemeConfig;
+  const { sidebarDisabled, noteWidth } = useThemeSettings();
 
   const { activeNoteWidth, initWidth } = useNoteWidth();
   initWidth(noteWidth); // set initial note width
