@@ -1,6 +1,10 @@
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
 
+const setCssVariable = (newWidth) => {
+  document.querySelector('body').style.setProperty('--note-width', newWidth);
+};
+
 const useNoteWidth = create(
   persist(
     (set, get) => ({
@@ -16,9 +20,7 @@ const useNoteWidth = create(
         } else {
           newWidth = curr.userWidth;
         }
-        document
-          .querySelector('body')
-          .style.setProperty('--note-width', newWidth);
+        setCssVariable(newWidth);
 
         if (
           curr.defaultWidth === defaultVal &&
@@ -27,6 +29,23 @@ const useNoteWidth = create(
           return;
         }
         set({ defaultWidth: defaultVal, activeNoteWidth: newWidth });
+      },
+      resetWidth: () => {
+        const curr = get();
+        set({
+          userWidth: null,
+          activeNoteWidth: curr.defaultWidth,
+        });
+
+        setCssVariable(curr.defaultWidth);
+      },
+      setUserWidth: (userWidth) => {
+        set({
+          userWidth: userWidth,
+          activeNoteWidth: userWidth,
+        });
+
+        setCssVariable(userWidth);
       },
     }),
     {

@@ -13,7 +13,7 @@ const SettingsModal = () => {
         as="div"
         static
         open={isOpen}
-        className="fixed z-10 inset-0 overflow-y-auto"
+        className="fixed z-10 inset-0 overflow-y-auto select-none"
         initialFocus={cancelButtonRef}
         onClose={close}
       >
@@ -27,7 +27,7 @@ const SettingsModal = () => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Dialog.Overlay className="fixed inset-0 bg-gray-800 bg-opacity-50 transition-opacity backdrop-filter backdrop-blur-lg" />
+            <Dialog.Overlay className="fixed inset-0 bg-gray-800 bg-opacity-50 transition-opacity backdrop-filter backdrop-blur" />
           </Transition.Child>
 
           <Transition.Child
@@ -39,8 +39,8 @@ const SettingsModal = () => {
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <div className="inline-block align-bottom bg-skin-popover rounded px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6 md:max-w-screen-lg m-auto">
-              <div className="flex justify-between text-skin-base">
+            <div className="inline-block align-bottom rounded text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full md:max-w-screen-lg m-auto">
+              <div className="flex items-center justify-between text-skin-base bg-skin-popover py-3 px-6 border-b border-skin-base">
                 <Dialog.Title as="h2" className="text-xl font-semibold">
                   Settings
                 </Dialog.Title>

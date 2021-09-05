@@ -80,6 +80,12 @@ module.exports = {
       borderColor: {
         skin: {
           base: withOpacity('--color-border-base'),
+          accent: withOpacity('--color-accent'),
+        },
+      },
+      boxShadow: {
+        skin: {
+          inner: 'inset 0px 0px 6px 0px rgb(0 0 0 / 15%)',
         },
       },
       ringColor: {

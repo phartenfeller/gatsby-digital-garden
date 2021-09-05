@@ -55,10 +55,11 @@ const Content = ({
           >
             {stackedPages.map((page, i) => (
               <NoteWrapper
-                key={page.slug}
                 i={typeof index !== 'undefined' ? index : i}
+                key={page.slug}
                 slug={page.slug}
                 title={page.data.title}
+                openPages={stackedPages.length}
               >
                 <Note
                   title={page.data.title}

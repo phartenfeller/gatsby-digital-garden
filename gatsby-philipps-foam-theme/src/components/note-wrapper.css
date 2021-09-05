@@ -9,7 +9,7 @@
   bottom: 0px;
   left: 0px;
   position: absolute;
-  background-color: transparent;
+  /* background-color: transparent; */
   width: 40px;
   overflow: hidden;
   opacity: 0;
@@ -43,7 +43,6 @@
     top: 0px;
     position: sticky;
     flex-grow: 1;
-    border-left: 1px solid var(--separator);
     padding: 0;
   }
 

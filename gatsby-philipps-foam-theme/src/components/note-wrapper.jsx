@@ -13,15 +13,22 @@ function noteContainerClassName({ overlay, obstructed, highlighted } = {}) {
   } ${highlighted ? 'note-container-highlighted' : ''}`;
 }
 
-const NoteWrapper = ({ children, slug, title }) => {
+const NoteWrapper = ({ children, slug, title, openPages }) => {
   const [, state, i] = useStackedPage();
+  const indexFromBehind = openPages - (i + 1);
 
   return (
     <div
       className={`border-l border-r border-skin-base ${noteContainerClassName(
         state
       )}`}
-      style={{ left: 40 * (i || 0), right: -585 }}
+      // No clue why this works...
+      style={{
+        left: 40 * (i || 0),
+        right: `calc(var(--note-width) * -1px + 40px + ${
+          40 * indexFromBehind
+        }px )`,
+      }}
     >
       <div className="note-content">{children}</div>
       <LinkToStacked
@@ -34,9 +41,14 @@ const NoteWrapper = ({ children, slug, title }) => {
   );
 };
 
-const ContextProvider = ({ i, ...rest }) => (
+const ContextProvider = ({ i, slug, title, openPages, children }) => (
   <PageIndexProvider value={i}>
-    <NoteWrapper {...rest} />
+    <NoteWrapper
+      slug={slug}
+      title={title}
+      openPages={openPages}
+      children={children}
+    />
   </PageIndexProvider>
 );
 
