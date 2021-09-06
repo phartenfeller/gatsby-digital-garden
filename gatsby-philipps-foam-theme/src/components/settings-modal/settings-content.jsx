@@ -6,6 +6,7 @@ import {
 } from '@heroicons/react/outline';
 import classNames from '../../utils/classNames';
 import AppearancePage from './appearance-page';
+import AboutPage from './about-page';
 
 const tabs = [
   {
@@ -62,7 +63,9 @@ const SettingsContents = () => (
           <Tab.Panel>
             <AppearancePage />
           </Tab.Panel>
-          {/* ... */}
+          <Tab.Panel>
+            <AboutPage />
+          </Tab.Panel>
         </Tab.Panels>
       </div>
     </div>

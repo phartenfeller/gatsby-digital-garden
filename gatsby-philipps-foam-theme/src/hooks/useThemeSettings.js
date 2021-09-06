@@ -6,11 +6,13 @@ export default () => {
       philippsFoamThemeConfig {
         sidebarDisabled
         noteWidth
+        themeVersion
       }
     }
   `);
 
-  const { sidebarDisabled, noteWidth } = data.philippsFoamThemeConfig;
+  const { sidebarDisabled, noteWidth, themeVersion } =
+    data.philippsFoamThemeConfig;
 
-  return { sidebarDisabled, noteWidth };
+  return { sidebarDisabled, noteWidth, themeVersion };
 };

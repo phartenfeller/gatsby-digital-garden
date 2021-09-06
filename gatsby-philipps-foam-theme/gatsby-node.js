@@ -71,6 +71,7 @@ exports.createSchemaCustomization = ({ actions }) => {
   createTypes(`type PhilippsFoamThemeConfig implements Node {
 sidebarDisabled: Boolean!
 noteWidth: Int!
+themeVersion: String!
 }`);
 };
 
@@ -95,9 +96,12 @@ exports.sourceNodes = (
   { actions: { createNode }, createNodeId, createContentDigest },
   { sidebarDisabled = false, noteWidth = 625 }
 ) => {
+  const packageJSON = require('./package.json');
+
   const themeConfig = {
     sidebarDisabled,
     noteWidth,
+    themeVersion: packageJSON.version,
   };
 
   createNode({
